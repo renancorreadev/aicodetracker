@@ -87,6 +87,7 @@ export class GitDiffProvider {
         blocks.push({ minus: currentMinus, plus: currentPlus, plusStartLine: blockPlusStart });
       }
 
+      // Convert each block into typed LineChange entries
       for (const block of blocks) {
         const modified = Math.min(block.minus, block.plus);
         const added = block.plus - modified;
