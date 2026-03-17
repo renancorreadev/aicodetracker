@@ -863,4 +863,4 @@ export class SummaryPanel {
     this.disposables.forEach(d => d.dispose());
   }
 }
-// Diff syntax coloring
+// File actions: copy, review, flag, open
