@@ -21,9 +21,14 @@ export class ReviewManager {
 
   isReviewed(relativePath: string): boolean { return this.reviewed.has(relativePath); }
   isFlagged(relativePath: string): boolean { return this.flagged.has(relativePath); }
-
   getReviewedCount(): number { return this.reviewed.size; }
   getFlaggedCount(): number { return this.flagged.size; }
+
+  resetAll(): void {
+    this.reviewed.clear();
+    this.flagged.clear();
+    this._onDidChange.fire();
+  }
 
   dispose(): void {
     this._onDidChange.dispose();
