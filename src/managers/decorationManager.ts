@@ -193,6 +193,7 @@ export class DecorationManager {
     return blocks;
   }
 
+  /** Build rich hover with block info, before/after preview, and actions */
   private buildHoverMessage(block: ChangeBlock, editor: vscode.TextEditor): vscode.MarkdownString[] {
     const messages: vscode.MarkdownString[] = [];
 
