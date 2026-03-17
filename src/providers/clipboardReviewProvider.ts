@@ -223,4 +223,4 @@ export class ClipboardReviewProvider {
     }
   }
 }
-// buildFilePrompt with diff and content
+// buildAllFilesPrompt for batch
