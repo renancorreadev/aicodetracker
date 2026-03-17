@@ -4,4 +4,15 @@
   <strong>See what AI wrote. Review what matters.</strong>
 </p>
 
-AI coding tools like Copilot, Cursor, and Claude write code fast — but are you reviewing what they write?
+---
+
+## Features
+
+### Inline Highlights
+Lines added since the last commit glow **green**. Modified lines glow **blue**. Deleted lines show a **red gutter marker**.
+
+### Before / After Hover
+Hover over any modified line to see the old code vs new code right in the editor.
+
+### Sidebar — AI Changes Tree
+A dedicated sidebar panel groups all changed files by folder with full review tracking.
