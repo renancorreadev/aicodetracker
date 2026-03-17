@@ -272,6 +272,7 @@ export class DecorationManager {
     return map[ext] || ext || 'text';
   }
 
+  /** Clear all active decorations from editor */
   clearDecorations(editor: vscode.TextEditor): void {
     editor.setDecorations(this.addedType, []);
     editor.setDecorations(this.modifiedType, []);
