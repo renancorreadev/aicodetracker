@@ -223,4 +223,4 @@ export class ClipboardReviewProvider {
     }
   }
 }
-// buildBlockPrompt for hover context
+// Language detection for code blocks
