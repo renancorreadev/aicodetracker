@@ -31,3 +31,10 @@ export interface FolderSummary {
   totalAdditions: number;
   totalDeletions: number;
 }
+
+export interface ReviewState {
+  /** Set of relative file paths that have been reviewed */
+  reviewed: Set<string>;
+  /** Set of relative file paths flagged for attention */
+  flagged: Set<string>;
+}
