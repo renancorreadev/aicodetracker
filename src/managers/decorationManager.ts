@@ -42,7 +42,8 @@ export class DecorationManager {
       borderWidth: '0 0 0 3px', borderStyle: 'solid', borderColor: 'rgba(40, 160, 40, 0.7)',
     });
     const modifiedGutter = vscode.window.createTextEditorDecorationType({
-      borderWidth: '0 0 0 3px', borderStyle: 'solid', borderColor: 'rgba(30, 120, 200, 0.7)',
+      borderWidth: '0 0 0 3px', borderStyle: 'solid', // Blue left border for modified lines
+      borderColor: 'rgba(30, 120, 200, 0.7)',
     });
     return { added, modified, deleted, addedGutter, modifiedGutter };
   }
