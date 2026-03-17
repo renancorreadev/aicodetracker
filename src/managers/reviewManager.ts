@@ -19,6 +19,14 @@ export class ReviewManager {
     this._onDidChange.fire();
   }
 
+  isReviewed(relativePath: string): boolean {
+    return this.reviewed.has(relativePath);
+  }
+
+  isFlagged(relativePath: string): boolean {
+    return this.flagged.has(relativePath);
+  }
+
   dispose(): void {
     this._onDidChange.dispose();
   }
