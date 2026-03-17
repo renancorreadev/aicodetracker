@@ -863,4 +863,4 @@ export class SummaryPanel {
     this.disposables.forEach(d => d.dispose());
   }
 }
-// File actions: copy, review, flag, open
+// Message handling for all actions
