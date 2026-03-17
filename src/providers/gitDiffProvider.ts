@@ -56,6 +56,7 @@ export class GitDiffProvider {
       const newStart = parseInt(match[3], 10);
       i++;
 
+      // Group consecutive -/+ lines into change blocks
       const blocks: Array<{ minus: number; plus: number; plusStartLine: number }> = [];
       let currentMinus = 0;
       let currentPlus = 0;
