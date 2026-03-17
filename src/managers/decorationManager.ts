@@ -282,6 +282,7 @@ export class DecorationManager {
     editor.setDecorations(this.modifiedGutterType, []);
   }
 
+  /** Recreate decoration types after config change */
   recreateDecorationTypes(): void {
     this.addedType.dispose();
     this.modifiedType.dispose();
