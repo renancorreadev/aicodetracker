@@ -863,4 +863,4 @@ export class SummaryPanel {
     this.disposables.forEach(d => d.dispose());
   }
 }
-// Expandable file cards
+// Diff syntax coloring
