@@ -6,7 +6,37 @@ export class GitDiffProvider {
   private gitRootCache = new Map<string, string | null>();
 
   async getChangesForFile(filePath: string): Promise<LineChange[]> {
+    const dir = path.dirname(filePath);
+    const gitRoot = await this.getGitRoot(dir);
+    if (!gitRoot) return [];
     return [];
+  }
+
+  private async getGitRoot(dir: string): Promise<string | null> {
+    if (this.gitRootCache.has(dir)) {
+      return this.gitRootCache.get(dir)!;
+    }
+    try {
+      const root = (await this.execGit(['rev-parse', '--show-toplevel'], dir)).trim();
+      this.gitRootCache.set(dir, root);
+      return root;
+    } catch {
+      this.gitRootCache.set(dir, null);
+      return null;
+    }
+  }
+
+  getGitRootForDir(dir: string): Promise<string | null> {
+    return this.getGitRoot(dir);
+  }
+
+  private execGit(args: string[], cwd: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+      execFile('git', args, { cwd }, (err, stdout) => {
+        if (err) reject(err);
+        else resolve(stdout);
+      });
+    });
   }
 
   dispose(): void {
