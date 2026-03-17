@@ -43,7 +43,7 @@ export class GitDiffProvider {
 
   private execGit(args: string[], cwd: string): Promise<string> {
     return new Promise((resolve, reject) => {
-      execFile('git', args, { cwd }, (err, stdout) => {
+      execFile('git', args, { cwd, maxBuffer: 5 * 1024 * 1024, timeout: 5000 }, (err, stdout) => {
         if (err) reject(err);
         else resolve(stdout);
       });
