@@ -45,6 +45,7 @@ export class GitDiffProvider {
   parseDiff(diffOutput: string): LineChange[] {
     const lines = diffOutput.split('\n');
     const changes: LineChange[] = [];
+    // Regex to match @@ hunk headers in unified diff output
     const hunkRegex = /^@@ -(\d+)(?:,(\d+))? \+(\d+)(?:,(\d+))? @@/;
 
     let i = 0;
