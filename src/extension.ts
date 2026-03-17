@@ -477,4 +477,4 @@ async function updateDecorations(editor: vscode.TextEditor) {
 export function deactivate() {
   // Cleanup handled by subscriptions
 }
-// Core providers wired
+// Debounced decoration updates
