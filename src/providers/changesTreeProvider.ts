@@ -454,4 +454,4 @@ export class ChangesTreeProvider implements vscode.TreeDataProvider<TreeItem> {
     this._onDidChangeTreeData.dispose();
   }
 }
-// Rich markdown tooltips for all items
+// Aggregate stats in section headers
