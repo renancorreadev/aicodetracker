@@ -22,7 +22,17 @@
         "command": "aicodetracker.toggle",
         "title": "AICodeTracker: Toggle Highlights"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "AICodeTracker",
+      "properties": {
+        "aicodetracker.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable AICodeTracker highlights"
+        }
+      }
+    }
   },
   "scripts": {
     "compile": "tsc -p ./",
