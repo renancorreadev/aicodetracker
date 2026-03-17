@@ -5,28 +5,64 @@ import { ChangeType, LineChange } from '../types';
 export class DecorationManager {
   private addedType: vscode.TextEditorDecorationType;
   private modifiedType: vscode.TextEditorDecorationType;
+  private deletedType: vscode.TextEditorDecorationType;
   private context: vscode.ExtensionContext;
 
   constructor(context: vscode.ExtensionContext) {
     this.context = context;
+    const types = this.createDecorationTypes();
+    this.addedType = types.added;
+    this.modifiedType = types.modified;
+    this.deletedType = types.deleted;
+  }
+
+  private createDecorationTypes() {
     const config = vscode.workspace.getConfiguration('aicodetracker');
     const addedColor = config.get<string>('addedColor', 'rgba(40, 160, 40, 0.10)');
     const modifiedColor = config.get<string>('modifiedColor', 'rgba(30, 120, 200, 0.10)');
 
-    this.addedType = vscode.window.createTextEditorDecorationType({
+    const added = vscode.window.createTextEditorDecorationType({
       backgroundColor: addedColor, isWholeLine: true,
       overviewRulerColor: 'rgba(40, 160, 40, 0.5)', overviewRulerLane: vscode.OverviewRulerLane.Left,
     });
-    this.modifiedType = vscode.window.createTextEditorDecorationType({
+    const modified = vscode.window.createTextEditorDecorationType({
       backgroundColor: modifiedColor, isWholeLine: true,
       overviewRulerColor: 'rgba(30, 120, 200, 0.5)', overviewRulerLane: vscode.OverviewRulerLane.Left,
     });
+    const deletedIconPath = path.join(this.context.extensionPath, 'assets', 'deleted-line.svg');
+    const deleted = vscode.window.createTextEditorDecorationType({
+      gutterIconPath: vscode.Uri.file(deletedIconPath), gutterIconSize: 'contain',
+      overviewRulerColor: 'rgba(220, 50, 50, 0.5)', overviewRulerLane: vscode.OverviewRulerLane.Left,
+    });
+    return { added, modified, deleted };
   }
 
-  applyDecorations(editor: vscode.TextEditor, changes: LineChange[]): void {}
+  applyDecorations(editor: vscode.TextEditor, changes: LineChange[]): void {
+    const addedRanges: vscode.DecorationOptions[] = [];
+    const modifiedRanges: vscode.DecorationOptions[] = [];
+    const deletedRanges: vscode.DecorationOptions[] = [];
+    for (const change of changes) {
+      const lineIndex = change.line - 1;
+      if (lineIndex < 0 || lineIndex >= editor.document.lineCount) continue;
+      const range = new vscode.Range(lineIndex, 0, lineIndex, Number.MAX_SAFE_INTEGER);
+      switch (change.type) {
+        case ChangeType.Added: addedRanges.push({ range }); break;
+        case ChangeType.Modified: modifiedRanges.push({ range }); break;
+        case ChangeType.Deleted: deletedRanges.push({ range }); break;
+      }
+    }
+    editor.setDecorations(this.addedType, addedRanges);
+    editor.setDecorations(this.modifiedType, modifiedRanges);
+    editor.setDecorations(this.deletedType, deletedRanges);
+  }
+
   clearDecorations(editor: vscode.TextEditor): void {
     editor.setDecorations(this.addedType, []);
     editor.setDecorations(this.modifiedType, []);
+    editor.setDecorations(this.deletedType, []);
   }
-  dispose(): void { this.addedType.dispose(); this.modifiedType.dispose(); }
+
+  dispose(): void {
+    this.addedType.dispose(); this.modifiedType.dispose(); this.deletedType.dispose();
+  }
 }
