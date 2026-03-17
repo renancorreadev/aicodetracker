@@ -89,6 +89,7 @@ export class GitDiffProvider {
 
       // Convert each block into typed LineChange entries
       for (const block of blocks) {
+        // Determine if lines are added, modified, or deleted
         const modified = Math.min(block.minus, block.plus);
         const added = block.plus - modified;
         for (let j = 0; j < modified; j++) {
