@@ -274,13 +274,12 @@ export class GitDiffProvider {
         }
       }
     } catch {
-      // numstat may fail for binary files, non-critical for binary files, that's ok
+      // numstat may fail for binary files, that's ok
     }
 
     return { files, gitRoot };
   }
 
-  /** Get the full diff for a file against HEAD */
   async getFileDiff(relativePath: string, gitRoot: string): Promise<string> {
     return this.execGit(['diff', 'HEAD', '--no-color', '--', relativePath], gitRoot);
   }
