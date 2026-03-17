@@ -162,4 +162,3 @@ function getCompoundExtension(fileName: string): string | null {
   }
   return null;
 }
-// Filename-based detection has priority over extension
