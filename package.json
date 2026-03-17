@@ -1,0 +1,12 @@
+{
+  "name": "aicodetracker",
+  "displayName": "AICodeTracker",
+  "description": "Track what AI wrote. Review what matters.",
+  "version": "0.1.0",
+  "publisher": "renancorrea",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "main": "./out/extension.js"
+}
