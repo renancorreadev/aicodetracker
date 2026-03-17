@@ -223,4 +223,4 @@ export class ClipboardReviewProvider {
     }
   }
 }
-// Language detection for code blocks
+// Copy commands registered in extension
