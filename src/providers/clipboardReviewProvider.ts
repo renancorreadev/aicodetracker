@@ -223,4 +223,4 @@ export class ClipboardReviewProvider {
     }
   }
 }
-// buildAllFilesPrompt for batch
+// buildBlockPrompt for hover context
