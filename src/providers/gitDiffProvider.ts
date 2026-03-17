@@ -9,13 +9,24 @@ export class GitDiffProvider {
     const dir = path.dirname(filePath);
     const gitRoot = await this.getGitRoot(dir);
     if (!gitRoot) return [];
+
+    const hasHead = await this.hasHeadCommit(gitRoot);
+    if (!hasHead) return [];
+
     return [];
   }
 
-  private async getGitRoot(dir: string): Promise<string | null> {
-    if (this.gitRootCache.has(dir)) {
-      return this.gitRootCache.get(dir)!;
+  private async hasHeadCommit(gitRoot: string): Promise<boolean> {
+    try {
+      await this.execGit(['rev-parse', 'HEAD'], gitRoot);
+      return true;
+    } catch {
+      return false;
     }
+  }
+
+  private async getGitRoot(dir: string): Promise<string | null> {
+    if (this.gitRootCache.has(dir)) return this.gitRootCache.get(dir)!;
     try {
       const root = (await this.execGit(['rev-parse', '--show-toplevel'], dir)).trim();
       this.gitRootCache.set(dir, root);
