@@ -1,3 +1,4 @@
+// DecorationManager — handles line highlighting and hover messages
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { ChangeType, LineChange } from '../types';
