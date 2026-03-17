@@ -11,8 +11,39 @@ export class GitDiffProvider {
     if (!gitRoot) return [];
 
     const hasHead = await this.hasHeadCommit(gitRoot);
-    if (!hasHead) return [];
+    if (!hasHead) return this.getAllLinesAsAdded(filePath);
 
+    const diffOutput = await this.execGit(
+      ['diff', 'HEAD', '--unified=0', '--no-color', '--', filePath],
+      gitRoot
+    );
+
+    if (!diffOutput.trim()) {
+      const statusOutput = await this.execGit(['status', '--porcelain', '--', filePath], gitRoot);
+      if (statusOutput.startsWith('??')) return this.getAllLinesAsAdded(filePath);
+      return [];
+    }
+
+    return this.parseDiff(diffOutput);
+  }
+
+  private async getAllLinesAsAdded(filePath: string): Promise<LineChange[]> {
+    const fs = await import('fs');
+    try {
+      const content = fs.readFileSync(filePath, 'utf-8');
+      const lineCount = content.split('\n').length;
+      const changes: LineChange[] = [];
+      for (let i = 1; i <= lineCount; i++) {
+        changes.push({ line: i, type: ChangeType.Added });
+      }
+      return changes;
+    } catch {
+      return [];
+    }
+  }
+
+  parseDiff(diffOutput: string): LineChange[] {
+    // TODO: implement unified diff parsing
     return [];
   }
 
