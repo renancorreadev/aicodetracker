@@ -477,4 +477,4 @@ async function updateDecorations(editor: vscode.TextEditor) {
 export function deactivate() {
   // Cleanup handled by subscriptions
 }
-// Config change listener
+// Old content loader for hover
