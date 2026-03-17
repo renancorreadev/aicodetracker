@@ -16,3 +16,11 @@ export enum FileStatus {
   Renamed = 'R',
   Untracked = '?',
 }
+
+export interface ChangedFile {
+  absolutePath: string;
+  relativePath: string;
+  status: FileStatus;
+  additions: number;
+  deletions: number;
+}
