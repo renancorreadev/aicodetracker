@@ -5,6 +5,7 @@ export enum ChangeType {
 }
 
 export interface LineChange {
+  /** 1-based line number in the current file */
   line: number;
   type: ChangeType;
 }
