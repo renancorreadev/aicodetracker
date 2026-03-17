@@ -863,4 +863,4 @@ export class SummaryPanel {
     this.disposables.forEach(d => d.dispose());
   }
 }
-// Stat cards with colored borders
+// Animated shimmer progress bar
