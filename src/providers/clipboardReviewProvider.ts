@@ -223,4 +223,4 @@ export class ClipboardReviewProvider {
     }
   }
 }
-// Review criteria: correctness, security, performance
+// Output format with severity levels
