@@ -308,3 +308,4 @@ export class DecorationManager {
     this.oldContentCache.clear();
   }
 }
+// Action buttons: copy for AI review, mark reviewed, flag
