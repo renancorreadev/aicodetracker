@@ -18,10 +18,17 @@ const EXT_MAP: Record<string, string> = {
   '.json': 'json', '.yaml': 'yaml', '.yml': 'yaml',
   '.md': 'markdown', '.sql': 'sql', '.sol': 'solidity',
   '.vue': 'vue', '.svelte': 'svelte', '.sh': 'shell',
+  '.dockerfile': 'docker', '.env': 'env', '.lock': 'lock',
+};
+
+const FILENAME_MAP: Record<string, string> = {
+  'Dockerfile': 'docker', 'package.json': 'package', 'package-lock.json': 'lock',
+  'tsconfig.json': 'config', '.gitignore': 'git', 'LICENSE': 'default', 'README.md': 'markdown',
 };
 
 export function getFileIcon(filePath: string): { light: vscode.Uri; dark: vscode.Uri } {
   const fileName = filePath.split('/').pop() || filePath;
+  if (FILENAME_MAP[fileName]) return iconPath(FILENAME_MAP[fileName]);
   const dotIndex = fileName.lastIndexOf('.');
   if (dotIndex > 0) {
     const ext = fileName.substring(dotIndex).toLowerCase();
