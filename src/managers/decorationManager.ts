@@ -1,4 +1,3 @@
-// DecorationManager — handles line highlighting and hover messages
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { ChangeType, LineChange } from '../types';
@@ -148,7 +147,6 @@ export class DecorationManager {
     editor.setDecorations(this.modifiedGutterType, modifiedGutterRanges);
   }
 
-  /** Group consecutive changes into blocks for hover context */
   private groupIntoBlocks(changes: LineChange[]): ChangeBlock[] {
     if (changes.length === 0) return [];
 
@@ -194,7 +192,6 @@ export class DecorationManager {
     return blocks;
   }
 
-  /** Build rich hover with block info, before/after preview, and actions */
   private buildHoverMessage(block: ChangeBlock, editor: vscode.TextEditor): vscode.MarkdownString[] {
     const messages: vscode.MarkdownString[] = [];
 
@@ -273,7 +270,6 @@ export class DecorationManager {
     return map[ext] || ext || 'text';
   }
 
-  /** Clear all active decorations from editor */
   clearDecorations(editor: vscode.TextEditor): void {
     editor.setDecorations(this.addedType, []);
     editor.setDecorations(this.modifiedType, []);
@@ -282,7 +278,6 @@ export class DecorationManager {
     editor.setDecorations(this.modifiedGutterType, []);
   }
 
-  /** Recreate decoration types after config change */
   recreateDecorationTypes(): void {
     this.addedType.dispose();
     this.modifiedType.dispose();
@@ -298,7 +293,6 @@ export class DecorationManager {
     this.modifiedGutterType = types.modifiedGutter;
   }
 
-  /** Clear the cached old content */
   clearOldContentCache(): void {
     this.oldContentCache.clear();
   }
@@ -312,4 +306,3 @@ export class DecorationManager {
     this.oldContentCache.clear();
   }
 }
-// Action buttons: copy for AI review, mark reviewed, flag
