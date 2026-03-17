@@ -454,4 +454,3 @@ export class ChangesTreeProvider implements vscode.TreeDataProvider<TreeItem> {
     this._onDidChangeTreeData.dispose();
   }
 }
-// Registered in extension.ts via createTreeView
