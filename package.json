@@ -1,8 +1,8 @@
 {
   "name": "aicodetracker",
   "displayName": "AICodeTracker",
-  "description": "Track what AI wrote. Review what matters.",
-  "version": "0.1.0",
+  "description": "Track what AI wrote. Review what matters. — Highlights AI-generated code changes, groups files by folder, review progress tracking, and one-click AI review prompts.",
+  "version": "1.2.0",
   "publisher": "renancorrea",
   "license": "MIT",
   "engines": {
@@ -12,20 +12,213 @@
     "Other",
     "Visualization"
   ],
+  "keywords": [
+    "ai",
+    "copilot",
+    "cursor",
+    "claude",
+    "diff",
+    "review",
+    "highlight",
+    "git",
+    "code review",
+    "ai code",
+    "tracker",
+    "code tracker"
+  ],
   "activationEvents": [
     "onStartupFinished"
   ],
   "main": "./out/extension.js",
   "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "aicodetracker-sidebar",
+          "title": "AICodeTracker",
+          "icon": "assets/sidebar-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "aicodetracker-sidebar": [
+        {
+          "id": "aicodetracker.changesTree",
+          "name": "AI Changes",
+          "icon": "assets/sidebar-icon.svg",
+          "contextualTitle": "AICodeTracker — Review AI Changes"
+        }
+      ]
+    },
     "commands": [
       {
         "command": "aicodetracker.toggle",
-        "title": "AICodeTracker: Toggle Highlights"
+        "title": "AICodeTracker: Toggle Highlights",
+        "icon": "$(eye)"
+      },
+      {
+        "command": "aicodetracker.refreshTree",
+        "title": "AICodeTracker: Refresh Changes",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "aicodetracker.openFile",
+        "title": "AICodeTracker: Open File"
+      },
+      {
+        "command": "aicodetracker.openDiff",
+        "title": "View Diff",
+        "icon": "$(diff)"
+      },
+      {
+        "command": "aicodetracker.markReviewed",
+        "title": "AICodeTracker: Mark as Reviewed"
+      },
+      {
+        "command": "aicodetracker.markReviewedTree",
+        "title": "Mark as Reviewed",
+        "icon": "$(check)"
+      },
+      {
+        "command": "aicodetracker.markFlagged",
+        "title": "AICodeTracker: Flag for Attention"
+      },
+      {
+        "command": "aicodetracker.markFlaggedTree",
+        "title": "Flag for Attention",
+        "icon": "$(warning)"
+      },
+      {
+        "command": "aicodetracker.resetReviews",
+        "title": "AICodeTracker: Reset All Reviews",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "aicodetracker.copyForReview",
+        "title": "AICodeTracker: Copy for AI Review"
+      },
+      {
+        "command": "aicodetracker.copyForReviewTree",
+        "title": "Copy for AI Review",
+        "icon": "$(clippy)"
+      },
+      {
+        "command": "aicodetracker.copyAllForReview",
+        "title": "AICodeTracker: Copy All for AI Review",
+        "icon": "$(clippy)"
+      },
+      {
+        "command": "aicodetracker.openSummary",
+        "title": "AICodeTracker: Open Changes Summary",
+        "icon": "$(graph)"
+      },
+      {
+        "command": "aicodetracker.markFolderReviewed",
+        "title": "Mark Folder as Reviewed",
+        "icon": "$(check-all)"
+      },
+      {
+        "command": "aicodetracker.markFolderFlagged",
+        "title": "Flag Folder",
+        "icon": "$(warning)"
+      },
+      {
+        "command": "aicodetracker.copyFolderForReview",
+        "title": "Copy Folder for AI Review",
+        "icon": "$(clippy)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "aicodetracker.refreshTree",
+          "when": "view == aicodetracker.changesTree",
+          "group": "navigation@1"
+        },
+        {
+          "command": "aicodetracker.toggle",
+          "when": "view == aicodetracker.changesTree",
+          "group": "navigation@2"
+        },
+        {
+          "command": "aicodetracker.resetReviews",
+          "when": "view == aicodetracker.changesTree",
+          "group": "navigation@3"
+        },
+        {
+          "command": "aicodetracker.copyAllForReview",
+          "when": "view == aicodetracker.changesTree",
+          "group": "navigation@4"
+        },
+        {
+          "command": "aicodetracker.openSummary",
+          "when": "view == aicodetracker.changesTree",
+          "group": "navigation@5"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "aicodetracker.markReviewedTree",
+          "when": "view == aicodetracker.changesTree && viewItem =~ /^file/",
+          "group": "inline@1"
+        },
+        {
+          "command": "aicodetracker.markFlaggedTree",
+          "when": "view == aicodetracker.changesTree && viewItem =~ /^file/",
+          "group": "inline@2"
+        },
+        {
+          "command": "aicodetracker.openDiff",
+          "when": "view == aicodetracker.changesTree && viewItem =~ /^file/",
+          "group": "inline@3"
+        },
+        {
+          "command": "aicodetracker.copyForReviewTree",
+          "when": "view == aicodetracker.changesTree && viewItem =~ /^file/",
+          "group": "inline@4"
+        },
+        {
+          "command": "aicodetracker.markFolderReviewed",
+          "when": "view == aicodetracker.changesTree && viewItem == folder",
+          "group": "inline@1"
+        },
+        {
+          "command": "aicodetracker.markFolderFlagged",
+          "when": "view == aicodetracker.changesTree && viewItem == folder",
+          "group": "inline@2"
+        },
+        {
+          "command": "aicodetracker.copyFolderForReview",
+          "when": "view == aicodetracker.changesTree && viewItem == folder",
+          "group": "inline@3"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "aicodetracker.changesTree",
+        "contents": "No changes detected.\n\nAICodeTracker highlights code that changed since your last commit — perfect for reviewing AI-generated code.\n\n[Open Summary Dashboard](command:aicodetracker.openSummary)\n\n[Refresh](command:aicodetracker.refreshTree)",
+        "when": "true"
       }
     ],
     "configuration": {
       "title": "AICodeTracker",
       "properties": {
+        "aicodetracker.addedColor": {
+          "type": "string",
+          "default": "rgba(40, 160, 40, 0.10)",
+          "description": "Background color for added lines"
+        },
+        "aicodetracker.modifiedColor": {
+          "type": "string",
+          "default": "rgba(30, 120, 200, 0.10)",
+          "description": "Background color for modified lines"
+        },
+        "aicodetracker.deletedIndicatorColor": {
+          "type": "string",
+          "default": "rgba(220, 50, 50, 0.6)",
+          "description": "Color for deleted line gutter indicator"
+        },
         "aicodetracker.enabled": {
           "type": "boolean",
           "default": true,
@@ -45,3 +238,4 @@
     "typescript": "^5.3.0"
   }
 }
+
