@@ -298,6 +298,7 @@ export class DecorationManager {
     this.modifiedGutterType = types.modifiedGutter;
   }
 
+  /** Clear the cached old content */
   clearOldContentCache(): void {
     this.oldContentCache.clear();
   }
