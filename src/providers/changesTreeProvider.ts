@@ -454,4 +454,4 @@ export class ChangesTreeProvider implements vscode.TreeDataProvider<TreeItem> {
     this._onDidChangeTreeData.dispose();
   }
 }
-// WarningFileItem for flagged files
+// Root children: stats, progress, warnings, changes
