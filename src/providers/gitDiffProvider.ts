@@ -19,6 +19,7 @@ export class GitDiffProvider {
     );
 
     if (!diffOutput.trim()) {
+      // Check if file is untracked
       const statusOutput = await this.execGit(['status', '--porcelain', '--', filePath], gitRoot);
       if (statusOutput.startsWith('??')) return this.getAllLinesAsAdded(filePath);
       return [];
