@@ -223,4 +223,3 @@ export class ClipboardReviewProvider {
     }
   }
 }
-// Copy commands registered in extension
