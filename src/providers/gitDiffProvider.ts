@@ -280,6 +280,7 @@ export class GitDiffProvider {
     return { files, gitRoot };
   }
 
+  /** Get the full diff for a file against HEAD */
   async getFileDiff(relativePath: string, gitRoot: string): Promise<string> {
     return this.execGit(['diff', 'HEAD', '--no-color', '--', relativePath], gitRoot);
   }
