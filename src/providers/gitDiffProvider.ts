@@ -27,6 +27,7 @@ export class GitDiffProvider {
     return this.parseDiff(diffOutput);
   }
 
+  /** Treat all lines as added for fresh repos with no HEAD */
   private async getAllLinesAsAdded(filePath: string): Promise<LineChange[]> {
     const fs = await import('fs');
     try {
