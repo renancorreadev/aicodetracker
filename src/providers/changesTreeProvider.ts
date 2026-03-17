@@ -454,4 +454,4 @@ export class ChangesTreeProvider implements vscode.TreeDataProvider<TreeItem> {
     this._onDidChangeTreeData.dispose();
   }
 }
-// Root children: stats, progress, warnings, changes
+// buildFileTree groups by folder path
