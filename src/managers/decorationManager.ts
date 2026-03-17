@@ -147,6 +147,7 @@ export class DecorationManager {
     editor.setDecorations(this.modifiedGutterType, modifiedGutterRanges);
   }
 
+  /** Group consecutive changes into blocks for hover context */
   private groupIntoBlocks(changes: LineChange[]): ChangeBlock[] {
     if (changes.length === 0) return [];
 
