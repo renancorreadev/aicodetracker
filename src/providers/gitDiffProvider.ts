@@ -274,7 +274,7 @@ export class GitDiffProvider {
         }
       }
     } catch {
-      // numstat may fail for binary files, that's ok
+      // numstat may fail for binary files, non-critical for binary files, that's ok
     }
 
     return { files, gitRoot };
