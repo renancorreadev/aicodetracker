@@ -24,3 +24,10 @@ export interface ChangedFile {
   additions: number;
   deletions: number;
 }
+
+export interface FolderSummary {
+  folderPath: string;
+  files: ChangedFile[];
+  totalAdditions: number;
+  totalDeletions: number;
+}
