@@ -8,3 +8,11 @@ export interface LineChange {
   line: number;
   type: ChangeType;
 }
+
+export enum FileStatus {
+  Added = 'A',
+  Modified = 'M',
+  Deleted = 'D',
+  Renamed = 'R',
+  Untracked = '?',
+}
