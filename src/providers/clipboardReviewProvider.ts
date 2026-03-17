@@ -7,3 +7,5 @@ import { ChangedFile, FileStatus } from '../types';
 export class ClipboardReviewProvider {
   constructor(private gitDiffProvider: GitDiffProvider) {}
 }
+
+// Builds senior engineer review prompt
