@@ -863,4 +863,3 @@ export class SummaryPanel {
     this.disposables.forEach(d => d.dispose());
   }
 }
-// Open summary command
