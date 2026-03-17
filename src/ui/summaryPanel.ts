@@ -863,4 +863,4 @@ export class SummaryPanel {
     this.disposables.forEach(d => d.dispose());
   }
 }
-// CSS variables for theme support
+// Stat cards with colored borders
