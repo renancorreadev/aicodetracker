@@ -1,3 +1,5 @@
+// Core type definitions for the AICodeTracker extension
+
 export enum ChangeType {
   Added = 'added',
   Modified = 'modified',
