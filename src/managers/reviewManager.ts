@@ -7,6 +7,15 @@ export class ReviewManager {
   private reviewed = new Set<string>();
   private flagged = new Set<string>();
 
+  toggleReviewed(relativePath: string): void {
+    if (this.reviewed.has(relativePath)) {
+      this.reviewed.delete(relativePath);
+    } else {
+      this.reviewed.add(relativePath);
+    }
+    this._onDidChange.fire();
+  }
+
   dispose(): void {
     this._onDidChange.dispose();
   }
