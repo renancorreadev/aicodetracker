@@ -454,4 +454,4 @@ export class ChangesTreeProvider implements vscode.TreeDataProvider<TreeItem> {
     this._onDidChangeTreeData.dispose();
   }
 }
-// Sort unreviewed files first
+// Rich markdown tooltips for all items
