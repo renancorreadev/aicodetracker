@@ -223,4 +223,4 @@ export class ClipboardReviewProvider {
     }
   }
 }
-// Output format with severity levels
+// buildFilePrompt with diff and content
