@@ -3,3 +3,8 @@ export enum ChangeType {
   Modified = 'modified',
   Deleted = 'deleted',
 }
+
+export interface LineChange {
+  line: number;
+  type: ChangeType;
+}
