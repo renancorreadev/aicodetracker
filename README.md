@@ -156,4 +156,4 @@ Found a bug or have a feature idea? [Open an issue](https://github.com/renancorr
 ## License
 
 MIT — Made by Renan Correa
-  
+   
