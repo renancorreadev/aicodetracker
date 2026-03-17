@@ -454,4 +454,4 @@ export class ChangesTreeProvider implements vscode.TreeDataProvider<TreeItem> {
     this._onDidChangeTreeData.dispose();
   }
 }
-// Per-folder review tracking
+// Expose counts for badge
